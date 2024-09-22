@@ -115,7 +115,7 @@ export default function TestPage({ params }: { params: { TESTID: string } }) {
           {questions.map((question, index) => (
             <div key={question.id} className="mb-6">
               <h3 className="font-semibold mb-2">Question {index + 1}: {question.question}</h3>
-              <p className="mb-2">Your answer: {Array.isArray(userAnswers[question.id]) ? userAnswers[question.id].join(', ') : (userAnswers[question.id] || 'Not answered')}</p>
+              <p className="mb-2">Your answer: {Array.isArray(userAnswers[question.id]) ? (userAnswers[question.id] as any).join(', ') : (userAnswers[question.id] || 'Not answered')}</p>
               <p className="mb-2">Correct answer: {question.correctAnswer ? JSON.parse(question.correctAnswer).join(', ') : 'N/A'}</p>
               <p className="text-sm text-gray-600">{question.explanation}</p>
             </div>
