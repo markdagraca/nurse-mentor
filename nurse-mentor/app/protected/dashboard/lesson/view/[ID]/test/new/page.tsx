@@ -73,7 +73,7 @@ export default function GenerateTestPage({ params }: { params: { ID: string } })
       const data = await response.json()
       
       // Redirect to the new test page
-      router.push(`/protected/dashboard/lesson/${ID}/test/${data.testId}`)
+      router.push(`/protected/dashboard/lesson/view/${ID}/test/${data.testId}`)
     } catch (error) {
       console.error('Error generating test:', error)
       setError(error instanceof Error ? error.message : "An error occurred while generating the test. Please try again.")
