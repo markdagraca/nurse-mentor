@@ -145,7 +145,7 @@ export default function NewLessonPage() {
       console.log("Lesson created successfully:", data);
 
       // Redirect to the new lesson page
-      router.push(`/lesson/${lessonId}`);
+      router.push(`/protected/dashboard/lesson/view/${lessonId}`);
 
     } catch (error) {
       console.error("Error creating lesson:", error);
