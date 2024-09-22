@@ -133,6 +133,7 @@ export const signOutAction = async () => {
 
 export async function signInWithGoogleAction() {
   const supabase = createServerActionClient({ cookies });
+  console.log(`${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,);
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
