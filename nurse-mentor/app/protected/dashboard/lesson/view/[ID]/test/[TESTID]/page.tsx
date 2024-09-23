@@ -116,7 +116,13 @@ export default function TestPage({ params }: { params: { TESTID: string } }) {
             <div key={question.id} className="mb-6">
               <h3 className="font-semibold mb-2">Question {index + 1}: {question.question}</h3>
               <p className="mb-2">Your answer: {Array.isArray(userAnswers[question.id]) ? (userAnswers[question.id] as any).join(', ') : (userAnswers[question.id] || 'Not answered')}</p>
-              <p className="mb-2">Correct answer: {question.correctAnswer ? JSON.parse(question.correctAnswer).join(', ') : 'N/A'}</p>
+              <p className="mb-2">
+                {Array.isArray(userAnswers[question.id]) && question.correctAnswer ? 
+                  (areArraysEqualIgnoreOrder(userAnswers[question.id] as string[], JSON.parse(question.correctAnswer)) ? 
+                    'Correct' : 'Incorrect') 
+                  : userAnswers[question.id] === question.correctAnswer ? 
+                    'Correct' : userAnswers[question.id] ? 'Incorrect' : 'Not answered'}
+              </p>
               <p className="text-sm text-gray-600">{question.explanation}</p>
             </div>
           ))}
@@ -179,4 +185,8 @@ export default function TestPage({ params }: { params: { TESTID: string } }) {
       </CardFooter>
     </Card>
   )
+}
+
+function areArraysEqualIgnoreOrder(arr1: string[], arr2: string[]): boolean {
+  return arr1.length === arr2.length && arr1.every(item => arr2.includes(item));
 }
